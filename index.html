@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Digital Wellbeing & Social Computing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Your Name - Digital Wellbeing Adventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #f8f9ff;
-            --text-primary: #2c3e50;
-            --accent-1: #647dee;
-            --accent-2: #7f53ac;
-            --calm-green: #48b4aa;
-            --soft-purple: #9f7aea;
-            --text-secondary: #64748b;
+            --bg-color: #f5f7ff;
+            --text-color: #2c3e50;
+            --accent-color: #00b894;
+            --secondary-color: #6c5ce7;
+            --paper-color: #fff;
+            --screen-green: #a8e6cf;
         }
 
         * {
@@ -23,15 +22,17 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Short Stack', cursive;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
+            padding: 20px;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* Interactive background */
-        .background-animation {
+        /* Karen-inspired background */
+        .background-pattern {
             position: fixed;
             top: 0;
             left: 0;
@@ -39,324 +40,298 @@
             height: 100%;
             z-index: -1;
             opacity: 0.1;
-            pointer-events: none;
+            background: 
+                linear-gradient(90deg, var(--screen-green) 1px, transparent 1px) 0 0 / 50px 50px,
+                linear-gradient(0deg, var(--screen-green) 1px, transparent 1px) 0 0 / 50px 50px;
+            animation: scanline 8s linear infinite;
         }
 
-        /* Gentle cursor effect */
-        .cursor-ring {
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 50px; }
+        }
+
+        /* Playful cursor - friendly computer bit */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
             position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--accent-1);
-            border-radius: 50%;
             pointer-events: none;
-            transition: transform 0.15s ease-out;
-            z-index: 9999;
-            opacity: 0.6;
+            z-index: 999;
+            border-radius: 4px;
+            transform: rotate(45deg);
+            transition: transform 0.1s;
         }
 
-        .ripple {
+        .cursor::before {
+            content: "◕";
             position: absolute;
-            border: 2px solid var(--accent-1);
+            font-size: 14px;
+            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .cursor::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px dashed var(--accent-color);
             border-radius: 50%;
-            animation: ripple 1s ease-out infinite;
-            opacity: 0;
+            top: -5px;
+            left: -5px;
+            animation: spin 4s linear infinite;
         }
 
-        @keyframes ripple {
-            from {
-                width: 40px;
-                height: 40px;
-                opacity: 0.5;
-            }
-            to {
-                width: 80px;
-                height: 80px;
-                opacity: 0;
-            }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
 
-        /* Main content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* Karen-inspired monitor friend */
+        .monitor-friend {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 120px;
+            height: 140px;
+            background: #2d3436;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 100;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 4rem 0;
-        }
-
-        .header h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Project Grid */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+        .monitor-screen {
+            width: 100%;
+            height: 80px;
+            background: var(--screen-green);
+            border-radius: 5px;
             position: relative;
             overflow: hidden;
         }
 
-        .project-card::before {
-            content: '';
+        .monitor-eye {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            width: 30px;
+            height: 30px;
+            background: #2d3436;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: blink 4s infinite;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        @keyframes blink {
+            0%, 48%, 52%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(0.1); }
+        }
+
+        .monitor-text {
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 10px;
+            font-family: 'Gaegu', cursive;
+        }
+
+        /* Rest of your existing styles... */
+        nav {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Gaegu', cursive;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.2rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .intro::after {
+            content: "⚡";
+            position: absolute;
+            font-size: 40px;
+            top: -20px;
+            right: -20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .intro h1 {
+            font-family: 'Gaegu', cursive;
+            font-size: 3rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .projects {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .project-card {
+            background: var(--paper-color);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-card::before {
+            content: ">";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--accent-color);
+            font-family: 'Gaegu', cursive;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
         }
 
         .project-card:hover::before {
             opacity: 1;
-        }
-
-        .project-type {
-            font-size: 0.9rem;
-            color: var(--accent-1);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-type::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent-1);
-            border-radius: 50%;
-            display: inline-block;
+            right: 20px;
         }
 
         .project-card h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            font-family: 'Gaegu', cursive;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
         }
 
-        .impact-metrics {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
+        /* Add retro computer elements to cards */
+        .project-card::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: 
+                linear-gradient(45deg, transparent 40%, var(--screen-green) 40%),
+                linear-gradient(-45deg, transparent 40%, var(--screen-green) 40%);
+            opacity: 0.2;
         }
 
-        .metric {
-            background: rgba(100, 125, 238, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--accent-1);
-        }
+        /* Your existing card styles... */
 
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .tag {
-            background: rgba(127, 83, 172, 0.1);
-            color: var(--accent-2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        /* Breathing animation for cards */
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .project-card:hover .impact-metrics {
-            animation: breathe 4s ease-in-out infinite;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .header {
-                padding: 2rem 0;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="cursor-ring"></div>
-    <div class="background-animation"></div>
+    <div class="background-pattern"></div>
+    <div class="cursor"></div>
+    
+    <div class="monitor-friend">
+        <div class="monitor-screen">
+            <div class="monitor-eye"></div>
+        </div>
+        <div class="monitor-text">Hello, friend!</div>
+    </div>
 
-    <div class="container">
-        <header class="header">
-            <h1>Building Digital Wellbeing</h1>
-            <p>Exploring the intersection of human wellness and social computing to create more mindful and connected digital experiences.</p>
-        </header>
+    <!-- Rest of your existing HTML structure... -->
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-        <div class="projects">
-            <div class="project-card">
-                <div class="project-type">Social Agent Research</div>
-                <h3>Empathetic AI Companion</h3>
-                <p>An AI-powered companion that helps users maintain digital wellness through mindful interaction patterns and emotional awareness.</p>
-                <div class="impact-metrics">
-                    <span class="metric">87% User Wellbeing ↑</span>
-                    <span class="metric">2.4k Daily Users</span>
-                </div>
-                <div class="project-tags">
-                    <span class="tag">Natural Language AI</span>
-                    <span class="tag">Emotion Recognition</span>
-                    <span class="tag">Digital Wellness</span>
-                </div>
+    <div class="intro">
+        <h1>Digital Wellbeing Adventures</h1>
+        <p>Creating friendly technology that helps humans flourish and connect meaningfully.</p>
+    </div>
+
+    <div class="projects">
+        <div class="project-card">
+            <h3>The Digital Wellness Companion</h3>
+            <p>A friendly AI that helps people build healthy digital habits, like having a wise friend in your pocket!</p>
+            <div class="tools-used">
+                <span class="tool">AI Magic</span>
+                <span class="tool">Wellness ♥</span>
+                <span class="tool">Connection ⚡</span>
             </div>
+        </div>
 
-            <div class="project-card">
-                <div class="project-type">Community Platform</div>
-                <h3>Mindful Social Network</h3>
-                <p>A social platform designed to promote meaningful connections and reduce digital anxiety through intentional interaction design.</p>
-                <div class="impact-metrics">
-                    <span class="metric">-40% Screen Time</span>
-                    <span class="metric">+60% Engagement Quality</span>
-                </div>
-                <div class="project-tags">
-                    <span class="tag">Social Computing</span>
-                    <span class="tag">Behavioral Design</span>
-                    <span class="tag">Community Health</span>
-                </div>
+        <div class="project-card">
+            <h3>The Social Connection Machine</h3>
+            <p>A delightful platform that turns online interactions into meaningful connections, sprinkled with joy!</p>
+            <div class="tools-used">
+                <span class="tool">Community</span>
+                <span class="tool">Kindness ★</span>
+                <span class="tool">Growth 🌱</span>
             </div>
+        </div>
 
-            <div class="project-card">
-                <div class="project-type">Wellness Integration</div>
-                <h3>Digital Balance Assistant</h3>
-                <p>An intelligent system that helps teams maintain work-life balance through social-aware scheduling and wellness prompts.</p>
-                <div class="impact-metrics">
-                    <span class="metric">92% Stress Reduction</span>
-                    <span class="metric">5k+ Team Members</span>
-                </div>
-                <div class="project-tags">
-                    <span class="tag">Workplace Wellness</span>
-                    <span class="tag">AI Planning</span>
-                    <span class="tag">Team Dynamics</span>
-                </div>
+        <div class="project-card">
+            <h3>The Mindful Messages Maker</h3>
+            <p>Teaching computers to be more understanding and helpful, like having a pen pal who really listens!</p>
+            <div class="tools-used">
+                <span class="tool">Empathy</span>
+                <span class="tool">Learning ↗</span>
+                <span class="tool">Care 💌</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Interactive cursor effect
-        const cursor = document.createElement('div');
-        cursor.className = 'cursor-ring';
-        document.body.appendChild(cursor);
-
-        let rippleTimeout;
-
+        // Cursor movement
+        const cursor = document.querySelector('.cursor');
+        
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 20 + 'px';
-            cursor.style.top = e.clientY - 20 + 'px';
-
-            // Clear existing ripple
-            if (rippleTimeout) {
-                clearTimeout(rippleTimeout);
-                cursor.innerHTML = '';
-            }
-
-            // Create new ripple
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            cursor.appendChild(ripple);
-
-            rippleTimeout = setTimeout(() => {
-                ripple.remove();
-            }, 1000);
+            requestAnimationFrame(() => {
+                cursor.style.left = e.pageX - 10 + 'px';
+                cursor.style.top = e.pageY - 10 + 'px';
+            });
         });
 
-        // Dynamic background animation
-        const canvas = document.createElement('canvas');
-        canvas.className = 'background-animation';
-        document.body.appendChild(canvas);
-        const ctx = canvas.getContext('2d');
+        // Monitor friend interaction
+        const monitor = document.querySelector('.monitor-friend');
+        const monitorText = document.querySelector('.monitor-text');
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        const messages = [
+            "Hello, friend!",
+            "Want to explore?",
+            "Let's connect!",
+            "Digital hugs!",
+            "Stay mindful! ✨"
+        ];
 
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        setInterval(() => {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            monitorText.textContent = randomMessage;
+        }, 4000);
 
-        const particles = [];
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 5 + 1,
-                speedX: Math.random() * 0.5 - 0.25,
-                speedY: Math.random() * 0.5 - 0.25
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(particle => {
-                particle.x += particle.speedX;
-                particle.y += particle.speedY;
-
-                if (particle.x < 0) particle.x = canvas.width;
-                if (particle.x > canvas.width) particle.x = 0;
-                if (particle.y < 0) particle.y = canvas.height;
-                if (particle.y > canvas.height) particle.y = 0;
-
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fillStyle = '#647dee';
-                ctx.fill();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
     </script>
 </body>
 </html>

@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Digital Wellbeing & Social Computing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Your Digital Study Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Patrick+Hand&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f8fafc;
-            --text-color: #1e293b;
-            --accent-color: #06b6d4;
-            --secondary-color: #6366f1;
-            --screen-green: #22c55e;
-            --paper-color: #ffffff;
+            --ink-color: #2b4257;
+            --paper-color: #fff7e6;
+            --highlight-color: #ffeb3b;
+            --coffee-stain: rgba(139, 69, 19, 0.1);
         }
 
         * {
@@ -22,395 +20,313 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            background: #8b5e3c url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%23704728"/><path d="M0 0h100v100H0z" fill="%23704728" fill-opacity="0.4"/><path d="M0 20h100M20 0v100" stroke="%23513619" stroke-width="0.5" stroke-opacity="0.1"/></svg>') repeat;
+            font-family: 'Patrick Hand', cursive;
+            color: var(--ink-color);
+            min-height: 100vh;
             padding: 20px;
-            cursor: none;
+            overflow-x: hidden;
         }
 
-        /* Custom Cursor */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
+        /* Jumping Doodle */
+        .doodle {
             position: fixed;
+            width: 30px;
+            height: 30px;
             pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
+            z-index: 1000;
+            animation: bounce 1s infinite alternate ease-in-out;
         }
 
-        .cursor-dot {
-            width: 4px;
-            height: 4px;
-            background: var(--accent-color);
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            border-radius: 50%;
-        }
-
-        .cursor-outline {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--accent-color);
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 4px;
-            transition: transform 0.1s;
-        }
-
-        /* Karen-inspired Computer Character */
-        .computer-character {
-            position: fixed;
-            right: 40px;
-            bottom: 40px;
-            width: 180px;
-            height: 220px;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .computer-body {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #2d3436 0%, #535c68 100%);
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .computer-screen {
-            width: 100%;
-            height: 120px;
-            background: #86ff9f;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .screen-display {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.05) 50%),
-                linear-gradient(rgba(0,0,0,0.05) 50%, transparent 50%);
-            background-size: 4px 4px;
-            animation: scan 10s linear infinite;
-        }
-
-        @keyframes scan {
+        @keyframes bounce {
             from { transform: translateY(0); }
-            to { transform: translateY(120px); }
+            to { transform: translateY(-20px); }
         }
 
-        .computer-eye {
+        /* Paper elements */
+        .sticky-note {
+            background: var(--paper-color);
+            padding: 20px;
+            position: relative;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-note::before {
+            content: '';
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #2d3436;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: blink 4s infinite;
-        }
-
-        .computer-eye::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #86ff9f;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes blink {
-            0%, 45%, 55%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(0.1); }
-        }
-
-        /* Circuit Background */
-        .circuit-background {
-            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
+            left: 20px;
+            width: 40%;
+            height: 20px;
+            background: rgba(255,235,59,0.4);
+            transform: translateY(-10px);
         }
 
-        .circuit-line {
+        .coffee-stain {
             position: absolute;
-            background: var(--accent-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--coffee-stain);
+            opacity: 0.6;
+            pointer-events: none;
         }
 
-        /* Content Styles */
-        .container {
+        /* Desk Items */
+        .pencil {
+            position: fixed;
+            width: 150px;
+            height: 10px;
+            background: #ffd700;
+            transform: rotate(45deg);
+            right: 50px;
+            bottom: 50px;
+        }
+
+        .pencil::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid #4a4a4a;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* Main Content */
+        .desk {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            padding: 40px;
+            perspective: 1000px;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 2rem 0;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1.1rem;
+        .header-note {
+            background: white;
+            padding: 30px;
+            margin-bottom: 60px;
             position: relative;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
+            transform: rotate(1deg);
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.1);
         }
 
-        nav a::after {
+        .header-note h1 {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 3rem;
+            color: var(--ink-color);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-note::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 10px;
+            right: 10px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,235,59,0.2);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .project-note {
+            background: white;
+            padding: 25px;
+            border-radius: 2px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .project-note:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        .project-note h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--ink-color);
+            position: relative;
+        }
+
+        .project-note h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s;
+            background: var(--highlight-color);
+            transform: scaleX(0.7);
         }
 
-        nav a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .header {
-            text-align: center;
-            padding: 4rem 0;
-            position: relative;
-        }
-
-        .header h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .header p {
-            font-size: 1.25rem;
-            color: var(--text-color);
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.8;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: var(--paper-color);
-            border-radius: 12px;
-            padding: 2rem;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        .project-card::before {
-            content: '';
+        /* Doodles */
+        .doodle-container {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            border-radius: 12px 12px 0 0;
-            opacity: 0;
-            transition: opacity 0.3s;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-        }
-
-        .project-illustration {
-            width: 100%;
-            height: 160px;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-            opacity: 0.8;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .tech-tag {
-            padding: 0.25rem 0.75rem;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--secondary-color);
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-
-        /* Add SVG illustrations */
-        .illustration {
+        .random-doodle {
             position: absolute;
-            width: 200px;
-            height: 200px;
-            opacity: 0.1;
+            font-size: 24px;
+            transform: rotate(var(--rotation));
+            opacity: 0.5;
         }
 
-        .illustration-1 { top: 10%; left: 5%; }
-        .illustration-2 { top: 30%; right: 5%; }
-        .illustration-3 { bottom: 10%; left: 15%; }
+        /* Paper clips */
+        .paper-clip {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            border: 3px solid #7f8c8d;
+            border-radius: 0 15px 15px 0;
+            top: -10px;
+            left: 20px;
+            transform: rotate(-45deg);
+        }
 
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
+            50% { transform: translateY(-10px) rotate(var(--rotation)); }
+        }
+
+        @keyframes scribble {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2px, 2px) rotate(2deg); }
+            50% { transform: translate(-2px, -2px) rotate(-2deg); }
+            75% { transform: translate(2px, -2px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .desk {
+                padding: 20px;
+            }
+
+            .header-note h1 {
+                font-size: 2rem;
+            }
+
+            .projects-container {
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <div class="cursor-dot"></div>
-        <div class="cursor-outline"></div>
-    </div>
+    <div id="doodle-jumper" class="doodle">👾</div>
 
-    <!-- Karen-inspired Computer Character -->
-    <div class="computer-character">
-        <div class="computer-body">
-            <div class="computer-screen">
-                <div class="screen-display"></div>
-                <div class="computer-eye"></div>
+    <div class="desk">
+        <div class="header-note">
+            <div class="paper-clip"></div>
+            <h1>Digital Wellbeing Studies</h1>
+            <p>Field notes on making technology more human-friendly</p>
+            <div class="coffee-stain" style="left: 70%; top: 30%;"></div>
+        </div>
+
+        <div class="projects-container">
+            <div class="project-note">
+                <div class="paper-clip" style="transform: rotate(-35deg);"></div>
+                <h3>Social Computing Lab</h3>
+                <p>Experiments in making computers better conversation partners. With lots of empathy and a bit of magic! ✨</p>
+                <div class="doodle-container">
+                    <span class="random-doodle" style="top: 80%; left: 10%; --rotation: 15deg;">🤖</span>
+                    <span class="random-doodle" style="top: 20%; right: 10%; --rotation: -10deg;">💭</span>
+                </div>
+            </div>
+
+            <div class="project-note">
+                <div class="paper-clip" style="transform: rotate(-40deg);"></div>
+                <h3>Digital Wellness Study</h3>
+                <p>Research on helping humans and computers live together happily. No robots were harmed in the process! 🌱</p>
+                <div class="doodle-container">
+                    <span class="random-doodle" style="top: 70%; left: 20%; --rotation: 5deg;">🎮</span>
+                    <span class="random-doodle" style="top: 30%; right: 15%; --rotation: -5deg;">❤️</span>
+                </div>
+            </div>
+
+            <div class="project-note">
+                <div class="paper-clip" style="transform: rotate(-38deg);"></div>
+                <h3>Connection Machine</h3>
+                <p>Building bridges between humans and algorithms. Making the internet a cozier place! 🌟</p>
+                <div class="doodle-container">
+                    <span class="random-doodle" style="top: 60%; left: 15%; --rotation: 8deg;">🔮</span>
+                    <span class="random-doodle" style="top: 25%; right: 20%; --rotation: -8deg;">🎨</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Circuit Background -->
-    <div class="circuit-background" id="circuit-bg"></div>
-
-    <div class="container">
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <header class="header">
-            <h1>Digital Wellbeing Innovation</h1>
-            <p>Creating technology that enhances human connection and promotes digital wellness.</p>
-        </header>
-
-        <div class="projects">
-            <div class="project-card">
-                <div class="project-illustration"></div>
-                <h3>Digital Wellness Assistant</h3>
-                <p>An AI companion that helps maintain healthy digital habits and meaningful online interactions.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">AI</span>
-                    <span class="tech-tag">Wellness</span>
-                    <span class="tech-tag">ML</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-illustration"></div>
-                <h3>Social Connection Platform</h3>
-                <p>Reimagining social networks with focus on authentic connections and mental wellbeing.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Social</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-illustration"></div>
-                <h3>Digital Balance Toolkit</h3>
-                <p>Tools and frameworks for creating more mindful digital experiences.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">UX</span>
-                    <span class="tech-tag">Research</span>
-                    <span class="tech-tag">Design</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="pencil"></div>
 
     <script>
-        // Custom cursor
-        const cursor = document.querySelector('.custom-cursor');
-        const cursorOutline = document.querySelector('.cursor-outline');
+        // Jumping doodle following cursor
+        const doodle = document.getElementById('doodle-jumper');
+        let doodleX = 0;
+        let doodleY = 0;
+        let targetX = 0;
+        let targetY = 0;
 
         document.addEventListener('mousemove', (e) => {
-            requestAnimationFrame(() => {
-                cursor.style.left = e.pageX - 10 + 'px';
-                cursor.style.top = e.pageY - 10 + 'px';
-            });
+            targetX = e.pageX;
+            targetY = e.pageY;
         });
 
-        // Generate circuit background
-        const circuitBg = document.getElementById('circuit-bg');
-        function createCircuits() {
-            for (let i = 0; i < 20; i++) {
-                const line = document.createElement('div');
-                line.className = 'circuit-line';
-                
-                const isHorizontal = Math.random() > 0.5;
-                const width = isHorizontal ? Math.random() * 100 + 50 : 2;
-                const height = isHorizontal ? 2 : Math.random() * 100 + 50;
-                
-                line.style.width = width + 'px';
-                line.style.height = height + 'px';
-                line.style.left = Math.random() * 100 + '%';
-                line.style.top = Math.random() * 100 + '%';
-                
-                circuitBg.appendChild(line);
+        function animateDoodle() {
+            doodleX += (targetX - doodleX - 15) * 0.1;
+            doodleY += (targetY - doodleY - 15) * 0.1;
+
+            doodle.style.left = `${doodleX}px`;
+            doodle.style.top = `${doodleY}px`;
+
+            requestAnimationFrame(animateDoodle);
+        }
+
+        animateDoodle();
+
+        // Random coffee stains
+        function addCoffeeStains() {
+            const container = document.querySelector('.desk');
+            for (let i = 0; i < 3; i++) {
+                const stain = document.createElement('div');
+                stain.className = 'coffee-stain';
+                stain.style.left = `${Math.random() * 80 + 10}%`;
+                stain.style.top = `${Math.random() * 80 + 10}%`;
+                stain.style.transform = `scale(${Math.random() * 1 + 0.5}) rotate(${Math.random() * 360}deg)`;
+                container.appendChild(stain);
             }
         }
 
-        createCircuits();
+        addCoffeeStains();
 
-        // Project card hover effect
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                cursorOutline.style.transform = 'scale(1.5)';
+        // Floating animation for project notes
+        document.querySelectorAll('.project-note').forEach(note => {
+            note.style.setProperty('--rotation', `${Math.random() * 6 - 3}deg`);
+            note.addEventListener('mouseenter', () => {
+                note.style.animation = 'scribble 0.5s ease';
             });
-
-            card.addEventListener('mouseleave', () => {
-                cursorOutline.style.transform = 'scale(1)';
+            note.addEventListener('mouseleave', () => {
+                note.style.animation = '';
             });
         });
     </script>

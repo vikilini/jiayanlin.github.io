@@ -3,123 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Creator & Builder</title>
+    <title>Your Name - Digital Wellbeing Adventures</title>
     <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #fdf6e3;
-            --text-color: #2c3e50;
-            --accent-color: #e76f51;
-            --secondary-color: #2a9d8f;
-            --paper-color: #fff;
-            --ink-color: #264653;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Previous styles remain... */
         body {
             font-family: 'Short Stack', cursive;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
             padding: 20px;
+            cursor: default; /* Default cursor for general content */
         }
 
-        /* Playful cursor */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-color);
-            position: fixed;
-            pointer-events: none;
-            border-radius: 50%;
-            z-index: 999;
-            transition: transform 0.1s;
+        /* Updated cursor styles */
+        a, button, .project-card {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%2300b894"><path d="M7,2l12,11.2l-8.2,0.8l3.4,7.5l-3.1,1.4l-3.4-7.5l-5.7,6.1l5,-19.5z"/></svg>') 1 1, pointer;
         }
 
-        .cursor-dot::after {
-            content: "✧";
-            position: absolute;
-            font-size: 16px;
-            color: var(--secondary-color);
-            transform: translate(-50%, -50%);
-            animation: sparkle 2s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
-        }
-
-        /* Simple Navigation */
-        nav {
-            text-align: center;
-            margin-bottom: 40px;
-            font-family: 'Gaegu', cursive;
-        }
-
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.2rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-            transform-origin: right;
-        }
-
-        nav a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Brief Introduction */
-        .intro {
-            text-align: center;
-            max-width: 800px;
+        /* Introduction section with image */
+        .intro-container {
+            max-width: 1000px;
             margin: 0 auto 60px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
             padding: 20px;
         }
 
-        .intro h1 {
-            font-family: 'Gaegu', cursive;
-            font-size: 3rem;
-            color: var(--ink-color);
-            margin-bottom: 20px;
-            line-height: 1.2;
+        .profile-image-container {
+            flex: 0 0 300px;
+            position: relative;
         }
 
-        .intro p {
-            font-size: 1.1rem;
-            color: var(--text-color);
+        .profile-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
         }
 
-        /* Project Cards */
+        .profile-frame {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: 10px;
+            bottom: 10px;
+            border: 3px solid var(--accent-color);
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .intro-content {
+            flex: 1;
+        }
+
+        /* Single column projects */
         .projects {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 30px;
             padding: 20px;
         }
@@ -130,165 +77,150 @@
             padding: 25px;
             transition: all 0.3s ease;
             position: relative;
-            cursor: pointer;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
         }
 
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 48%, var(--accent-color) 49%, var(--accent-color) 51%, transparent 52%);
-            background-size: 10px 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border-radius: 15px;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px) rotate(1deg);
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .project-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .project-card h3 {
-            font-family: 'Gaegu', cursive;
-            font-size: 1.8rem;
-            color: var(--ink-color);
-            margin-bottom: 15px;
+        /* Social Media Section */
+        .social-section {
+            max-width: 800px;
+            margin: 60px auto 0;
+            padding: 40px 20px;
+            text-align: center;
             position: relative;
         }
 
-        .project-card p {
-            color: var(--text-color);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.6;
+        .social-section::before {
+            content: "✨";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
         }
 
-        .tools-used {
+        .social-links {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .tool {
-            background: var(--bg-color);
-            color: var(--secondary-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 2px solid var(--secondary-color);
-        }
-
-        /* Simple Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
+        .social-link {
+            padding: 15px 30px;
+            background: var(--paper-color);
+            border-radius: 30px;
+            text-decoration: none;
             color: var(--text-color);
-            font-size: 0.9rem;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
         }
 
-        /* Responsive Design */
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .social-link::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px dashed var(--accent-color);
+            border-radius: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
-            .intro h1 {
-                font-size: 2.5rem;
+            .intro-container {
+                flex-direction: column;
+                text-align: center;
             }
 
-            .projects {
-                padding: 10px;
+            .profile-image-container {
+                flex: 0 0 auto;
+                width: 80%;
+                margin: 0 auto;
             }
 
-            nav a {
-                margin: 0 10px;
+            .social-links {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom cursor -->
-    <div class="cursor-dot"></div>
-
     <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <div class="intro">
-        <h1>Hello! I'm Your Name</h1>
-        <p>I create wonderful things with code and imagination. Each project is a new adventure waiting to be explored.</p>
+    <div class="intro-container">
+        <div class="profile-image-container">
+            <img src="/api/placeholder/400/400" alt="Your Name" class="profile-image">
+            <div class="profile-frame"></div>
+        </div>
+        <div class="intro-content">
+            <h1>Hello! I'm Your Name</h1>
+            <p>I create wonderful things with code and imagination. Each project is a new adventure waiting to be explored. I focus on making technology that helps people connect and thrive in the digital world.</p>
+        </div>
     </div>
 
     <div class="projects">
         <div class="project-card">
-            <h3>The Fantastic Project</h3>
-            <p>A magical application that transforms complex data into beautiful visualizations. Like turning Brussels sprouts into chocolate cake!</p>
+            <h3>The Fantastic Digital Companion</h3>
+            <p>A magical application that helps people navigate their digital lives with more joy and less stress. Like having a wise friend who knows all about technology!</p>
             <div class="tools-used">
-                <span class="tool">React</span>
-                <span class="tool">D3.js</span>
-                <span class="tool">Magic ✨</span>
+                <span class="tool">AI Magic</span>
+                <span class="tool">Wellness ♥</span>
+                <span class="tool">Connection ⚡</span>
             </div>
         </div>
 
         <div class="project-card">
-            <h3>The Marvelous Machine</h3>
-            <p>An AI-powered system that helps people find their perfect book match. It's like having a librarian who never sleeps!</p>
+            <h3>The Marvelous Social Platform</h3>
+            <p>A delightful space where technology helps people form meaningful connections. It's like a cozy digital cafe where everyone feels welcome!</p>
             <div class="tools-used">
-                <span class="tool">Python</span>
-                <span class="tool">TensorFlow</span>
-                <span class="tool">Dreams 🌟</span>
+                <span class="tool">Community</span>
+                <span class="tool">Kindness ★</span>
+                <span class="tool">Growth 🌱</span>
             </div>
         </div>
 
         <div class="project-card">
-            <h3>The Whimsical Widget</h3>
-            <p>A delightful tool that makes everyday tasks more fun. It's like having a tiny helper who loves paperwork!</p>
+            <h3>The Whimsical Wellness Tracker</h3>
+            <p>A thoughtful tool that helps people maintain their digital wellbeing with a touch of magic and lots of care.</p>
             <div class="tools-used">
-                <span class="tool">Vue.js</span>
-                <span class="tool">Node.js</span>
-                <span class="tool">Joy 🎈</span>
+                <span class="tool">Wellness</span>
+                <span class="tool">Analytics ✨</span>
+                <span class="tool">Care 💌</span>
             </div>
         </div>
     </div>
 
-    <footer>
-        Made with imagination in 2024 ✨
-    </footer>
+    <div class="social-section">
+        <h2>Let's Connect!</h2>
+        <p>Find me across the digital universe</p>
+        <div class="social-links">
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">GitHub</a>
+            <a href="#" class="social-link">Email</a>
+        </div>
+    </div>
 
-    <script>
-        // Playful cursor effect
-        const cursorDot = document.querySelector(".cursor-dot");
-
-        window.addEventListener("mousemove", (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            requestAnimationFrame(() => {
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-            });
-        });
-
-        // Add slight wobble to cards on hover
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseover', () => {
-                const rotation = Math.random() * 2 - 1; // Random rotation between -1 and 1 degree
-                card.style.transform = `translateY(-5px) rotate(${rotation}deg)`;
-            });
-
-            card.addEventListener('mouseout', () => {
-                card.style.transform = 'translateY(0) rotate(0deg)';
-            });
-        });
-    </script>
 </body>
 </html>

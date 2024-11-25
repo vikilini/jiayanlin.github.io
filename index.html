@@ -116,14 +116,14 @@
 
         /* Project Cards */
         .projects {
-            max-width: 1200px;
+            max-width: 800px;  /* Reduced from 1200px to make cards narrower */
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;     /* Changed from grid to flex */
+            flex-direction: column;  /* Stack cards vertically */
             gap: 30px;
             padding: 20px;
         }
-
+        
         .project-card {
             background: var(--paper-color);
             border-radius: 15px;
@@ -132,7 +132,9 @@
             position: relative;
             cursor: pointer;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            width: 100%;      /* Ensure card takes full width of container */
         }
+
 
         .project-card::before {
             content: "";

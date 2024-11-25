@@ -197,6 +197,17 @@
             font-size: 0.9rem;
         }
 
+        .project-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-link:hover {
+            transform: translateY(-5px);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .intro h1 {
@@ -228,8 +239,9 @@
         <p>I create wonderful things with code and imagination. Each project is a new adventure waiting to be explored.</p>
     </div>
 
-    <a href="projects/uhomes.md" class="project-card-link">
+    
         <div class="project-card">
+            <a href="projects/uhomes.md" class="project-card-link">  </a>
             <h3>The Uhomes project</h3>
             <p>A data management platform targeting student accommdation providers</p>
             <div class="tools-used">
@@ -238,7 +250,7 @@
                 <span class="tool">Prototyping</span>
             </div>
         </div>
-    </a>
+  
 
         <div class="project-card">
             <h3>The Marvelous Machine</h3>

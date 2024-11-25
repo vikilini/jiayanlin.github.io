@@ -124,63 +124,32 @@
             padding: 20px;
         }
         
-        .project-card {
-            background: var(--paper-color);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            width: 100%;      /* Ensure card takes full width of container */
+        .projects {
+            max-width: 1000px;  /* Adjusted for 2x2 layout */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);  /* 2 columns */
+            gap: 30px;
+            padding: 20px;
         }
-
-
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 48%, var(--accent-color) 49%, var(--accent-color) 51%, transparent 52%);
-            background-size: 10px 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border-radius: 15px;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px) rotate(1deg);
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .project-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .project-card h3 {
-            font-family: 'Gaegu', cursive;
-            font-size: 1.8rem;
-            color: var(--ink-color);
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .project-card p {
-            color: var(--text-color);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
+        
         .project-link {
             text-decoration: none;
             color: inherit;
             display: block;
         }
         
-        /* Move hover effects to the link */
+        .project-card {
+            background: var(--paper-color);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            height: 100%;  /* Ensure all cards are same height */
+        }
+        
+        /* Keep your existing hover effects */
         .project-link:hover .project-card {
             transform: translateY(-5px) rotate(1deg);
             box-shadow: 8px 8px 20px rgba(0,0,0,0.15);
@@ -188,6 +157,13 @@
         
         .project-link:hover .project-card::before {
             opacity: 0.1;
+        }
+        
+        /* Add responsive design */
+        @media (max-width: 768px) {
+            .projects {
+                grid-template-columns: 1fr;  /* Stack on mobile */
+            }
         }
 
         .tools-used {
@@ -247,7 +223,7 @@
     </div>
 
     <div class="projects">
-        <a href="./projects/project1.html" class="project-link">
+        <a href="projects/project1.html" class="project-link">
             <div class="project-card">
                 <h3>The Fantastic Project</h3>
                 <p>A magical application that transforms complex data into beautiful visualizations. Like turning Brussels sprouts into chocolate cake!</p>
@@ -258,27 +234,43 @@
                 </div>
             </div>
         </a>
+    
+        <a href="projects/project2.html" class="project-link">
+            <div class="project-card">
+                <h3>The Marvelous Machine</h3>
+                <p>An AI-powered system that helps people find their perfect book match. It's like having a librarian who never sleeps!</p>
+                <div class="tools-used">
+                    <span class="tool">Python</span>
+                    <span class="tool">TensorFlow</span>
+                    <span class="tool">Dreams 🌟</span>
+                </div>
+            </div>
+        </a>
+    
+        <a href="projects/project3.html" class="project-link">
+            <div class="project-card">
+                <h3>The Whimsical Widget</h3>
+                <p>A delightful tool that makes everyday tasks more fun. It's like having a tiny helper who loves paperwork!</p>
+                <div class="tools-used">
+                    <span class="tool">Vue.js</span>
+                    <span class="tool">Node.js</span>
+                    <span class="tool">Joy 🎈</span>
+                </div>
+            </div>
+        </a>
+    
+        <a href="projects/project4.html" class="project-link">
+            <div class="project-card">
+                <h3>The Digital Companion</h3>
+                <p>A friendly AI that helps people build better digital habits. Like having a wise friend in your pocket!</p>
+                <div class="tools-used">
+                    <span class="tool">ML</span>
+                    <span class="tool">React Native</span>
+                    <span class="tool">Care 💌</span>
+                </div>
+            </div>
+        </a>
     </div>
-
-        <div class="project-card">
-            <h3>The Marvelous Machine</h3>
-            <p>An AI-powered system that helps people find their perfect book match. It's like having a librarian who never sleeps!</p>
-            <div class="tools-used">
-                <span class="tool">Python</span>
-                <span class="tool">TensorFlow</span>
-                <span class="tool">Dreams 🌟</span>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <h3>The Whimsical Widget</h3>
-            <p>A delightful tool that makes everyday tasks more fun. It's like having a tiny helper who loves paperwork!</p>
-            <div class="tools-used">
-                <span class="tool">Vue.js</span>
-                <span class="tool">Node.js</span>
-                <span class="tool">Joy 🎈</span>
-            </div>
-        </div>
     </div>
 
     <footer>

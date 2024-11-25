@@ -1,61 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Name - Personal Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px solid #eee;
-        }
-        
-        nav {
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        nav a {
-            margin: 0 15px;
-            color: #333;
-            text-decoration: none;
-        }
-        
-        nav a:hover {
-            text-decoration: underline;
-        }
-        
-        .projects {
-            margin: 40px 0;
-        }
-        
-        .project-card {
-            border: 1px solid #eee;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        
-        .project-card h3 {
-            margin-top: 0;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            border-top: 2px solid #eee;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -76,21 +26,36 @@
     </section>
     
     <section id="projects" class="projects">
-        <h2>My Projects</h2>
-        
-        <div class="project-card">
+        <a href="projects/project1.html" class="project-card">
+            <img src="/api/placeholder/400/320" alt="Project 1 Preview">
             <h3>Project 1</h3>
-            <p>Description of your first project. What did you build? 
-               What technologies did you use? What problems did you solve?</p>
-            <a href="#">View Project</a>
-        </div>
+            <p>A brief description of your first project. Make it engaging and concise.</p>
+            <div class="technologies">
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+        </a>
         
-        <div class="project-card">
+        <a href="projects/project2.html" class="project-card">
+            <img src="/api/placeholder/400/320" alt="Project 2 Preview">
             <h3>Project 2</h3>
-            <p>Description of your second project. Highlight your role 
-               and the impact of the project.</p>
-            <a href="#">View Project</a>
-        </div>
+            <p>Description of your second project. Highlight key features.</p>
+            <div class="technologies">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+            </div>
+        </a>
+        
+        <a href="projects/project3.html" class="project-card">
+            <img src="/api/placeholder/400/320" alt="Project 3 Preview">
+            <h3>Project 3</h3>
+            <p>Overview of your third project. What makes it special?</p>
+            <div class="technologies">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+            </div>
+        </a>
     </section>
     
     <section id="contact">
@@ -101,6 +66,67 @@
             <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
         </p>
     </section>
+    
+    <footer>
+        <p>© 2024 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+<!-- projects/project1.html (template for each project) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Your Name</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="../index.html" class="back-button">← Back to Projects</a>
+    
+    <div class="project-page">
+        <header>
+            <h1>Project 1</h1>
+            <div class="technologies">
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+        </header>
+
+        <img src="/api/placeholder/400/320" alt="Project 1 Preview" class="project-image">
+        
+        <div class="project-details">
+            <div class="project-section">
+                <h2>Overview</h2>
+                <p>Detailed description of what this project is about, its purpose, and its main features.</p>
+            </div>
+            
+            <div class="project-section">
+                <h2>Technologies Used</h2>
+                <p>Explain the technology stack and why you chose these technologies.</p>
+            </div>
+            
+            <div class="project-section">
+                <h2>Challenges & Solutions</h2>
+                <p>Discuss the main challenges you faced and how you overcame them.</p>
+            </div>
+            
+            <div class="project-section">
+                <h2>Results</h2>
+                <p>Share the outcomes, learnings, and impact of the project.</p>
+            </div>
+            
+            <div class="project-section">
+                <h2>Links</h2>
+                <p>
+                    <a href="https://github.com/yourusername/project1">GitHub Repository</a> |
+                    <a href="https://project1-demo.com">Live Demo</a>
+                </p>
+            </div>
+        </div>
+    </div>
     
     <footer>
         <p>© 2024 Your Name. All rights reserved.</p>

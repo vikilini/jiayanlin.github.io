@@ -1,135 +1,420 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Your Name - Tech Explorer</title>
+    <style>
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --accent-primary: #64ffda;
+            --accent-secondary: #c792ea;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom cursor */
+        .cursor-dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-primary);
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 999;
+        }
+
+        .cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--accent-primary);
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 999;
+            transition: transform 0.1s;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '>';
+            color: var(--accent-primary);
+            margin-right: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), rgba(199, 146, 234, 0.1));
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+        }
+
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--text-secondary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            color: var(--accent-primary);
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Project Cards */
+        .projects-section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .section-title::before {
+            content: '02.';
+            color: var(--accent-primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-primary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 10%;
+            text-align: center;
+        }
+
+        .contact-title {
+            color: var(--accent-primary);
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 20px;
+        }
+
+        .contact-description {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            padding: 10px 20px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 0 5%;
+            }
+
+            .projects-section,
+            .contact-section {
+                padding: 50px 5%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <p>Web Developer | Designer | Creative Thinker</p>
-    </header>
-    
+    <!-- Custom cursor elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <div class="nav-links">
+            <a href="#home">home.js</a>
+            <a href="#projects">projects.js</a>
+            <a href="#contact">contact.js</a>
+        </div>
     </nav>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm a [your role/title] passionate about [your interests]. 
-           I love working on projects that [what you enjoy doing].</p>
-    </section>
-    
-    <section id="projects" class="projects">
-        <a href="projects/project1.html" class="project-card">
-            <img src="/api/placeholder/400/320" alt="Project 1 Preview">
-            <h3>Project 1</h3>
-            <p>A brief description of your first project. Make it engaging and concise.</p>
-            <div class="technologies">
-                <span class="tech-tag">HTML</span>
-                <span class="tech-tag">CSS</span>
-                <span class="tech-tag">JavaScript</span>
-            </div>
-        </a>
-        
-        <a href="projects/project2.html" class="project-card">
-            <img src="/api/placeholder/400/320" alt="Project 2 Preview">
-            <h3>Project 2</h3>
-            <p>Description of your second project. Highlight key features.</p>
-            <div class="technologies">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Node.js</span>
-            </div>
-        </a>
-        
-        <a href="projects/project3.html" class="project-card">
-            <img src="/api/placeholder/400/320" alt="Project 3 Preview">
-            <h3>Project 3</h3>
-            <p>Overview of your third project. What makes it special?</p>
-            <div class="technologies">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Django</span>
-            </div>
-        </a>
-    </section>
-    
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Get in touch with me at: [your professional email]</p>
-        <p>Find me on: 
-            <a href="https://github.com/yourusername">GitHub</a> | 
-            <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
-        </p>
-    </section>
-    
-    <footer>
-        <p>© 2024 Your Name. All rights reserved.</p>
-    </footer>
-</body>
-</html>
 
-<!-- projects/project1.html (template for each project) -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 - Your Name</title>
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <a href="../index.html" class="back-button">← Back to Projects</a>
-    
-    <div class="project-page">
-        <header>
-            <h1>Project 1</h1>
-            <div class="technologies">
-                <span class="tech-tag">HTML</span>
-                <span class="tech-tag">CSS</span>
-                <span class="tech-tag">JavaScript</span>
-            </div>
-        </header>
+    <section id="home" class="hero">
+        <div class="grid-background"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle animate">Hello, world! I'm</p>
+            <h1 class="hero-title animate">Your Name</h1>
+            <p class="hero-description animate">
+                I'm a software engineer specializing in building (and occasionally designing) 
+                exceptional digital experiences. Currently, I'm focused on building accessible, 
+                human-centered products.
+            </p>
+        </div>
+    </section>
 
-        <img src="/api/placeholder/400/320" alt="Project 1 Preview" class="project-image">
-        
-        <div class="project-details">
-            <div class="project-section">
-                <h2>Overview</h2>
-                <p>Detailed description of what this project is about, its purpose, and its main features.</p>
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project Alpha</h3>
+                <p>A next-generation platform that bridges the gap between traditional systems 
+                   and blockchain technology.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">GraphQL</span>
+                </div>
             </div>
-            
-            <div class="project-section">
-                <h2>Technologies Used</h2>
-                <p>Explain the technology stack and why you chose these technologies.</p>
+
+            <div class="project-card">
+                <h3>Project Beta</h3>
+                <p>An AI-powered analytics dashboard that provides real-time insights and 
+                   predictive modeling capabilities.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">AWS</span>
+                </div>
             </div>
-            
-            <div class="project-section">
-                <h2>Challenges & Solutions</h2>
-                <p>Discuss the main challenges you faced and how you overcame them.</p>
-            </div>
-            
-            <div class="project-section">
-                <h2>Results</h2>
-                <p>Share the outcomes, learnings, and impact of the project.</p>
-            </div>
-            
-            <div class="project-section">
-                <h2>Links</h2>
-                <p>
-                    <a href="https://github.com/yourusername/project1">GitHub Repository</a> |
-                    <a href="https://project1-demo.com">Live Demo</a>
-                </p>
+
+            <div class="project-card">
+                <h3>Project Gamma</h3>
+                <p>A revolutionary IoT platform that connects smart devices with unprecedented 
+                   security and efficiency.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">IoT</span>
+                    <span class="tech-tag">Rust</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <footer>
-        <p>© 2024 Your Name. All rights reserved.</p>
-    </footer>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-description">
+            Whether you have a question or just want to say hi, I'll try my best to get 
+            back to you! I'm always open to discussing new projects, creative ideas, or 
+            opportunities to be part of your visions.
+        </p>
+        <div class="social-links">
+            <a href="https://github.com/yourusername">GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+            <a href="mailto:your.email@example.com">Email</a>
+        </div>
+    </section>
+
+    <script>
+        // Custom cursor effect
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Add slight delay to outline
+            setTimeout(() => {
+                cursorOutline.style.left = `${posX - 13}px`;
+                cursorOutline.style.top = `${posY - 13}px`;
+            }, 50);
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.25
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = "fadeInUp 0.6s ease forwards";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>

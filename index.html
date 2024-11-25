@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Digital Wellbeing Adventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Short+Stack&display=swap" rel="stylesheet">
+    <title>Your Name - Digital Wellbeing & Social Computing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f5f7ff;
-            --text-color: #2c3e50;
-            --accent-color: #00b894;
-            --secondary-color: #6c5ce7;
-            --paper-color: #fff;
-            --screen-green: #a8e6cf;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --accent-color: #06b6d4;
+            --secondary-color: #6366f1;
+            --screen-green: #22c55e;
+            --paper-color: #ffffff;
         }
 
         * {
@@ -22,101 +22,96 @@
         }
 
         body {
-            font-family: 'Short Stack', cursive;
+            font-family: 'DM Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
+            cursor: none;
         }
 
-        /* Karen-inspired background */
-        .background-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background: 
-                linear-gradient(90deg, var(--screen-green) 1px, transparent 1px) 0 0 / 50px 50px,
-                linear-gradient(0deg, var(--screen-green) 1px, transparent 1px) 0 0 / 50px 50px;
-            animation: scanline 8s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 50px; }
-        }
-
-        /* Playful cursor - friendly computer bit */
-        .cursor {
+        /* Custom Cursor */
+        .custom-cursor {
             width: 20px;
             height: 20px;
-            background: var(--accent-color);
             position: fixed;
             pointer-events: none;
-            z-index: 999;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            border-radius: 50%;
+        }
+
+        .cursor-outline {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--accent-color);
+            position: absolute;
+            top: 0;
+            left: 0;
             border-radius: 4px;
-            transform: rotate(45deg);
             transition: transform 0.1s;
         }
 
-        .cursor::before {
-            content: "◕";
-            position: absolute;
-            font-size: 14px;
-            color: white;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        .cursor::after {
-            content: "";
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 2px dashed var(--accent-color);
-            border-radius: 50%;
-            top: -5px;
-            left: -5px;
-            animation: spin 4s linear infinite;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Karen-inspired monitor friend */
-        .monitor-friend {
+        /* Karen-inspired Computer Character */
+        .computer-character {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 120px;
-            height: 140px;
-            background: #2d3436;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            right: 40px;
+            bottom: 40px;
+            width: 180px;
+            height: 220px;
             z-index: 100;
+            pointer-events: none;
         }
 
-        .monitor-screen {
+        .computer-body {
+            position: absolute;
+            bottom: 0;
             width: 100%;
-            height: 80px;
-            background: var(--screen-green);
+            height: 180px;
+            background: linear-gradient(135deg, #2d3436 0%, #535c68 100%);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .computer-screen {
+            width: 100%;
+            height: 120px;
+            background: #86ff9f;
             border-radius: 5px;
             position: relative;
             overflow: hidden;
         }
 
-        .monitor-eye {
+        .screen-display {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.05) 50%),
+                linear-gradient(rgba(0,0,0,0.05) 50%, transparent 50%);
+            background-size: 4px 4px;
+            animation: scan 10s linear infinite;
+        }
+
+        @keyframes scan {
+            from { transform: translateY(0); }
+            to { transform: translateY(120px); }
+        }
+
+        .computer-eye {
+            position: absolute;
+            width: 40px;
+            height: 40px;
             background: #2d3436;
             border-radius: 50%;
             top: 50%;
@@ -125,189 +120,260 @@
             animation: blink 4s infinite;
         }
 
+        .computer-eye::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #86ff9f;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         @keyframes blink {
-            0%, 48%, 52%, 100% { transform: translate(-50%, -50%) scale(1); }
+            0%, 45%, 55%, 100% { transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(0.1); }
         }
 
-        .monitor-text {
-            color: white;
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 10px;
-            font-family: 'Gaegu', cursive;
+        /* Circuit Background */
+        .circuit-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
         }
 
-        /* Rest of your existing styles... */
+        .circuit-line {
+            position: absolute;
+            background: var(--accent-color);
+        }
+
+        /* Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
         nav {
-            text-align: center;
-            margin-bottom: 40px;
-            font-family: 'Gaegu', cursive;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem 0;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         nav a {
             color: var(--text-color);
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             position: relative;
+            padding: 0.5rem 1rem;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--accent-color);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s;
         }
 
-        .intro {
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .header {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-            padding: 20px;
+            padding: 4rem 0;
             position: relative;
         }
 
-        .intro::after {
-            content: "⚡";
-            position: absolute;
-            font-size: 40px;
-            top: -20px;
-            right: -20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .intro h1 {
-            font-family: 'Gaegu', cursive;
-            font-size: 3rem;
-            color: var(--text-color);
-            margin-bottom: 20px;
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
         }
 
-        .projects {
-            max-width: 1200px;
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            max-width: 600px;
             margin: 0 auto;
+            opacity: 0.8;
+        }
+
+        .projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            gap: 2rem;
+            padding: 2rem 0;
         }
 
         .project-card {
             background: var(--paper-color);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 2rem;
             position: relative;
-            cursor: pointer;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         .project-card::before {
-            content: ">";
+            content: '';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            color: var(--accent-color);
-            font-family: 'Gaegu', cursive;
-            font-size: 1.5rem;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 12px 12px 0 0;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
         }
 
         .project-card:hover::before {
             opacity: 1;
-            right: 20px;
         }
 
         .project-card h3 {
-            font-family: 'Gaegu', cursive;
-            font-size: 1.8rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--text-color);
-            margin-bottom: 15px;
         }
 
-        /* Add retro computer elements to cards */
-        .project-card::after {
-            content: "";
+        .project-illustration {
+            width: 100%;
+            height: 160px;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            opacity: 0.8;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--secondary-color);
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Add SVG illustrations */
+        .illustration {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            background: 
-                linear-gradient(45deg, transparent 40%, var(--screen-green) 40%),
-                linear-gradient(-45deg, transparent 40%, var(--screen-green) 40%);
-            opacity: 0.2;
+            width: 200px;
+            height: 200px;
+            opacity: 0.1;
         }
 
-        /* Your existing card styles... */
+        .illustration-1 { top: 10%; left: 5%; }
+        .illustration-2 { top: 30%; right: 5%; }
+        .illustration-3 { bottom: 10%; left: 15%; }
 
     </style>
 </head>
 <body>
-    <div class="background-pattern"></div>
-    <div class="cursor"></div>
-    
-    <div class="monitor-friend">
-        <div class="monitor-screen">
-            <div class="monitor-eye"></div>
-        </div>
-        <div class="monitor-text">Hello, friend!</div>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
     </div>
 
-    <!-- Rest of your existing HTML structure... -->
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="intro">
-        <h1>Digital Wellbeing Adventures</h1>
-        <p>Creating friendly technology that helps humans flourish and connect meaningfully.</p>
+    <!-- Karen-inspired Computer Character -->
+    <div class="computer-character">
+        <div class="computer-body">
+            <div class="computer-screen">
+                <div class="screen-display"></div>
+                <div class="computer-eye"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="projects">
-        <div class="project-card">
-            <h3>The Digital Wellness Companion</h3>
-            <p>A friendly AI that helps people build healthy digital habits, like having a wise friend in your pocket!</p>
-            <div class="tools-used">
-                <span class="tool">AI Magic</span>
-                <span class="tool">Wellness ♥</span>
-                <span class="tool">Connection ⚡</span>
-            </div>
-        </div>
+    <!-- Circuit Background -->
+    <div class="circuit-background" id="circuit-bg"></div>
 
-        <div class="project-card">
-            <h3>The Social Connection Machine</h3>
-            <p>A delightful platform that turns online interactions into meaningful connections, sprinkled with joy!</p>
-            <div class="tools-used">
-                <span class="tool">Community</span>
-                <span class="tool">Kindness ★</span>
-                <span class="tool">Growth 🌱</span>
-            </div>
-        </div>
+    <div class="container">
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-        <div class="project-card">
-            <h3>The Mindful Messages Maker</h3>
-            <p>Teaching computers to be more understanding and helpful, like having a pen pal who really listens!</p>
-            <div class="tools-used">
-                <span class="tool">Empathy</span>
-                <span class="tool">Learning ↗</span>
-                <span class="tool">Care 💌</span>
+        <header class="header">
+            <h1>Digital Wellbeing Innovation</h1>
+            <p>Creating technology that enhances human connection and promotes digital wellness.</p>
+        </header>
+
+        <div class="projects">
+            <div class="project-card">
+                <div class="project-illustration"></div>
+                <h3>Digital Wellness Assistant</h3>
+                <p>An AI companion that helps maintain healthy digital habits and meaningful online interactions.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">AI</span>
+                    <span class="tech-tag">Wellness</span>
+                    <span class="tech-tag">ML</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-illustration"></div>
+                <h3>Social Connection Platform</h3>
+                <p>Reimagining social networks with focus on authentic connections and mental wellbeing.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Social</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-illustration"></div>
+                <h3>Digital Balance Toolkit</h3>
+                <p>Tools and frameworks for creating more mindful digital experiences.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">UX</span>
+                    <span class="tech-tag">Research</span>
+                    <span class="tech-tag">Design</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Cursor movement
-        const cursor = document.querySelector('.cursor');
-        
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
         document.addEventListener('mousemove', (e) => {
             requestAnimationFrame(() => {
                 cursor.style.left = e.pageX - 10 + 'px';
@@ -315,23 +381,38 @@
             });
         });
 
-        // Monitor friend interaction
-        const monitor = document.querySelector('.monitor-friend');
-        const monitorText = document.querySelector('.monitor-text');
+        // Generate circuit background
+        const circuitBg = document.getElementById('circuit-bg');
+        function createCircuits() {
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'circuit-line';
+                
+                const isHorizontal = Math.random() > 0.5;
+                const width = isHorizontal ? Math.random() * 100 + 50 : 2;
+                const height = isHorizontal ? 2 : Math.random() * 100 + 50;
+                
+                line.style.width = width + 'px';
+                line.style.height = height + 'px';
+                line.style.left = Math.random() * 100 + '%';
+                line.style.top = Math.random() * 100 + '%';
+                
+                circuitBg.appendChild(line);
+            }
+        }
 
-        const messages = [
-            "Hello, friend!",
-            "Want to explore?",
-            "Let's connect!",
-            "Digital hugs!",
-            "Stay mindful! ✨"
-        ];
+        createCircuits();
 
-        setInterval(() => {
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            monitorText.textContent = randomMessage;
-        }, 4000);
+        // Project card hover effect
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'scale(1.5)';
+            });
 
+            card.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'scale(1)';
+            });
+        });
     </script>
 </body>
 </html>

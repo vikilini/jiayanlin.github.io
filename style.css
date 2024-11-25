@@ -137,3 +137,21 @@ footer {
 .project-section {
     margin: 20px 0;
 }
+
+.profile-image-container {
+    flex: 0 0 300px;  /* keeps container width fixed */
+    position: relative;
+    height: 350px;    /* adjust this based on your needs */
+    width: 300px;     /* explicitly set width */
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;     /* fill container */
+    object-fit: cover;    /* maintains aspect ratio while filling container */
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+

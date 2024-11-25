@@ -172,6 +172,31 @@
             line-height: 1.6;
         }
         
+        /* Add these new rules */
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        /* Move the hover effects to the link if you want the whole card to animate on hover */
+        .project-link:hover .project-card {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .project-link:hover .project-card::before {
+            opacity: 0.1;
+        }
+        
+        /* Update your existing project-card hover rules to remove them since they're now on the link */
+        .project-card:hover {
+            /* Remove these rules since they're now on the link */
+        }
+        
+        .project-card:hover::before {
+            /* Remove these rules since they're now on the link */
+        }
         .tools-used {
             display: flex;
             flex-wrap: wrap;
@@ -196,8 +221,6 @@
             color: var(--text-color);
             font-size: 0.9rem;
         }
-
-
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -226,21 +249,23 @@
     </nav>
 
     <div class="intro">
-        <h1>Hello! I'm Jiayan Lin</h1>
+        <h1>Hello! I'm Your Name</h1>
         <p>I create wonderful things with code and imagination. Each project is a new adventure waiting to be explored.</p>
     </div>
 
-    <a href="./projects/project1.html" class="project-card">
-        <div class="project-card">
-            <h3>The Uhomes project</h3>
-            <p>A data management platform targeting student accommdation providers</p>
-            <div class="tools-used">
-                <span class="tool">B2B</span>
-                <span class="tool">Launched</span>
-                <span class="tool">Prototyping</span>
+    <div class="projects">
+        <a href="./projects/project1.html" class="project-link">
+            <div class="project-card">
+                <h3>Uhomes Projectt</h3>
+                <p>A magical application that transforms complex data into beautiful visualizations. Like turning Brussels sprouts into chocolate cake!</p>
+                <div class="tools-used">
+                    <span class="tool">B2B</span>
+                    <span class="tool">Data Dashboard</span>
+                    <span class="tool">Launched</span>
+                </div>
             </div>
-        </div>
-       </a>
+        </a>
+    </div>
 
         <div class="project-card">
             <h3>The Marvelous Machine</h3>

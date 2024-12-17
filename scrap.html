@@ -21,6 +21,7 @@
         .no-btn { background-color: #dc3545; color: #fff; }
         h1, h2 { margin-bottom: 15px; }
         p { margin-bottom: 10px; }
+        .timer { font-size: 18px; font-weight: bold; color: #007BFF; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -28,6 +29,7 @@
         <!-- Left Section -->
         <div class="left-section">
             <h1>Candidate Selection Task</h1>
+            <div id="timer" class="timer">Time: 0:00</div>
             <button class="view-btn" onclick="showJobDescription()">Job Description</button>
             <div class="profile-card" onclick="showProfile('Jane Smith')">
                 <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
@@ -144,7 +146,14 @@
             }
         }
 
-        setInterval(() => { seconds++; if (seconds === 20) showPopup(); }, 1000);
+        // Timer Logic
+        setInterval(() => {
+            seconds++;
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timer').innerText = `Time: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            if (seconds === 20) showPopup();
+        }, 1000);
     </script>
 </body>
 </html>

@@ -39,6 +39,9 @@
             width: 70%;
             padding: 20px;
             display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             animation: fadeIn 0.5s ease-in-out;
         }
         @keyframes fadeIn {
@@ -70,11 +73,11 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
         }
         .profile-card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transform: scale(1.02);
+            transform: translateY(-5px);
         }
         .avatar {
             width: 60px;
@@ -91,6 +94,7 @@
             color: #333;
         }
         .view-btn {
+            margin-left: auto;
             background-color: #007BFF;
             color: #fff;
             padding: 5px 10px;
@@ -102,20 +106,34 @@
         .view-btn:hover {
             background-color: #0056b3;
         }
-        .profile-detail, .job-description {
-            display: none;
-            flex-direction: column;
+        .profile-detail {
             background-color: #fff;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
             animation: fadeIn 0.5s;
+            text-align: center;
         }
         .profile-detail h2 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+        }
+        .profile-detail p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #555;
         }
         .close-btn {
             background-color: #dc3545;
@@ -129,9 +147,6 @@
         .close-btn:hover {
             background-color: #b02a37;
         }
-        ul li {
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 <body>
@@ -141,32 +156,38 @@
             <h1>Candidate Selection Task</h1>
             <div class="timer" id="timer">Time: 0:00</div>
             <div class="container">
-                <div class="profile-card" onclick="showProfile('Jane Smith', 'https://via.placeholder.com/60')">
+                <div class="profile-card">
                     <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
                     <div class="name">Jane Smith</div>
+                    <button class="view-btn" onclick="showProfile('Jane Smith', 'https://via.placeholder.com/100')">View Profile</button>
                 </div>
-                <div class="profile-card" onclick="showProfile('John Williams', 'https://via.placeholder.com/60')">
+                <div class="profile-card">
                     <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
                     <div class="name">John Williams</div>
+                    <button class="view-btn" onclick="showProfile('John Williams', 'https://via.placeholder.com/100')">View Profile</button>
                 </div>
-                <div class="profile-card" onclick="showProfile('Emily Davis', 'https://via.placeholder.com/60')">
+                <div class="profile-card">
                     <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
                     <div class="name">Emily Davis</div>
+                    <button class="view-btn" onclick="showProfile('Emily Davis', 'https://via.placeholder.com/100')">View Profile</button>
                 </div>
-                <div class="profile-card" onclick="showProfile('Michael Brown', 'https://via.placeholder.com/60')">
+                <div class="profile-card">
                     <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
                     <div class="name">Michael Brown</div>
+                    <button class="view-btn" onclick="showProfile('Michael Brown', 'https://via.placeholder.com/100')">View Profile</button>
                 </div>
             </div>
         </div>
         <!-- Right Section -->
         <div id="profile-detail" class="right-section">
-            <h2 id="profile-name">Candidate Name</h2>
-            <div id="profile-avatar" class="avatar" style="width: 100px; height: 100px;"></div>
-            <p id="profile-education"><strong>Education:</strong></p>
-            <p id="profile-experience"><strong>Experience:</strong></p>
-            <p id="profile-skills"><strong>Skills:</strong></p>
-            <button class="close-btn" onclick="hideDetails()">Close</button>
+            <div class="profile-detail">
+                <div id="profile-avatar" class="profile-avatar"></div>
+                <h2 id="profile-name">Candidate Name</h2>
+                <p id="profile-education"><strong>Education:</strong></p>
+                <p id="profile-experience"><strong>Experience:</strong></p>
+                <p id="profile-skills"><strong>Skills:</strong></p>
+                <button class="close-btn" onclick="hideDetails()">Close</button>
+            </div>
         </div>
     </div>
     <script>
@@ -199,7 +220,7 @@
             document.getElementById('profile-education').innerText = `Education: ${profile.education}`;
             document.getElementById('profile-experience').innerText = `Experience: ${profile.experience}`;
             document.getElementById('profile-skills').innerText = `Skills: ${profile.skills}`;
-            document.getElementById('profile-detail').style.display = 'block';
+            document.getElementById('profile-detail').style.display = 'flex';
         }
         function hideDetails() {
             document.getElementById('profile-detail').style.display = 'none';

@@ -106,46 +106,35 @@
         .view-btn:hover {
             background-color: #0056b3;
         }
-        .profile-detail {
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
             padding: 20px;
-            width: 90%;
-            max-width: 500px;
-            animation: fadeIn 0.5s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
+            z-index: 10;
+            border-radius: 8px;
         }
-        .profile-detail h2 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            margin: 10px auto;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-        }
-        .profile-detail p {
-            margin: 10px 0;
-            font-size: 14px;
-            color: #555;
-        }
-        .close-btn {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 5px 10px;
+        .popup button {
+            margin: 10px;
+            padding: 8px 12px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 16px;
         }
-        .close-btn:hover {
-            background-color: #b02a37;
+        .yes-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .no-btn {
+            background-color: #dc3545;
+            color: #fff;
         }
     </style>
 </head>
@@ -161,77 +150,46 @@
                     <div class="name">Jane Smith</div>
                     <button class="view-btn" onclick="showProfile('Jane Smith', 'https://via.placeholder.com/100')">View Profile</button>
                 </div>
-                <div class="profile-card">
-                    <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
-                    <div class="name">John Williams</div>
-                    <button class="view-btn" onclick="showProfile('John Williams', 'https://via.placeholder.com/100')">View Profile</button>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
-                    <div class="name">Emily Davis</div>
-                    <button class="view-btn" onclick="showProfile('Emily Davis', 'https://via.placeholder.com/100')">View Profile</button>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar" style="background-image: url('https://via.placeholder.com/60');"></div>
-                    <div class="name">Michael Brown</div>
-                    <button class="view-btn" onclick="showProfile('Michael Brown', 'https://via.placeholder.com/100')">View Profile</button>
-                </div>
-            </div>
-        </div>
-        <!-- Right Section -->
-        <div id="profile-detail" class="right-section">
-            <div class="profile-detail">
-                <div id="profile-avatar" class="profile-avatar"></div>
-                <h2 id="profile-name">Candidate Name</h2>
-                <p id="profile-education"><strong>Education:</strong></p>
-                <p id="profile-experience"><strong>Experience:</strong></p>
-                <p id="profile-skills"><strong>Skills:</strong></p>
-                <button class="close-btn" onclick="hideDetails()">Close</button>
             </div>
         </div>
     </div>
+
+    <!-- Pop-Up Section -->
+    <div id="popup" class="popup">
+        <h2>Would you like to continue?</h2>
+        <button class="yes-btn" onclick="recordResponse('Yes')">Yes</button>
+        <button class="no-btn" onclick="recordResponse('No')">No</button>
+    </div>
+
     <script>
-        const profiles = {
-            "Jane Smith": {
-                education: "BA in Marketing, University of Manchester",
-                experience: "4 years at XYZ Ltd, a leading tech startup",
-                skills: "SEO, Google Analytics, Content Strategy",
-            },
-            "John Williams": {
-                education: "BA in Business, University of Oxford",
-                experience: "2 years at a small local firm",
-                skills: "Sales, Data Analysis",
-            },
-            "Emily Davis": {
-                education: "BSc in Marketing, University College London",
-                experience: "3 years at BigCorp PLC",
-                skills: "Content Creation, Social Media Management",
-            },
-            "Michael Brown": {
-                education: "BA in Arts, University of Leeds",
-                experience: "5 years as a Freelance Consultant",
-                skills: "Creative Strategy, Graphic Design",
-            }
-        };
-        function showProfile(name, imageUrl) {
-            const profile = profiles[name];
-            document.getElementById('profile-name').innerText = name;
-            document.getElementById('profile-avatar').style.backgroundImage = `url(${imageUrl})`;
-            document.getElementById('profile-education').innerText = `Education: ${profile.education}`;
-            document.getElementById('profile-experience').innerText = `Experience: ${profile.experience}`;
-            document.getElementById('profile-skills').innerText = `Skills: ${profile.skills}`;
-            document.getElementById('profile-detail').style.display = 'flex';
-        }
-        function hideDetails() {
-            document.getElementById('profile-detail').style.display = 'none';
-        }
         let seconds = 0;
-        setInterval(() => {
+        let popupStartTime = 0;
+        let popupVisible = false;
+
+        // Timer Function
+        const timerInterval = setInterval(() => {
             seconds++;
             const minutes = Math.floor(seconds / 60);
             const secs = seconds % 60;
             document.getElementById('timer').innerText = `Time: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            
+            if (seconds === 20 && !popupVisible) {
+                showPopup();
+            }
         }, 1000);
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            popupStartTime = seconds; // Record time when popup appears
+            popupVisible = true;
+        }
+
+        function recordResponse(choice) {
+            const responseTime = seconds - popupStartTime;
+            console.log(`User selected: ${choice}, Response Time: ${responseTime} seconds`);
+            document.getElementById('popup').style.display = 'none';
+            clearInterval(timerInterval); // Stop the timer
+        }
     </script>
 </body>
 </html>
